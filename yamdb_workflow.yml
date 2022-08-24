@@ -62,7 +62,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-          sudo docker pull kitahkitah/infra_web
+          sudo docker pull kitahkitah/infra_web:latest
           sudo docker stop $(sudo docker ps -aq)
           cd infra/
           sudo docker-compose up --build -d
