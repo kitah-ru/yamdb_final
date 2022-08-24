@@ -11,7 +11,7 @@ from api.permissions import AdminOrReadOnly, IsAuthorModAdmOrReadOnly
 from api.serializers import (CategorySerializer, CommentsSerializer,
                              GenreSerializer, ReviewSerializer,
                              TitleSerializer)
-from reviews.models import Category, Comments, Genre, Title, Review
+from reviews.models import Category, Comments, Genre, Review, Title
 
 
 class CategoryGenreViewSet(CreateModelMixin, DestroyModelMixin,
