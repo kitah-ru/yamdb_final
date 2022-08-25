@@ -1,4 +1,4 @@
-name: Django-app workflow
+name: yamdb_workflow
 
 on: [push]
 
@@ -19,12 +19,16 @@ jobs:
         pip install flake8 pep8-naming flake8-broken-line flake8-return
         pip install -r api_yamdb/requirements.txt 
 
-    - name: Test with flake8, pytest and django tests
+    - name: Test with flake8
       run: |
         python -m flake8 api_yamdb/
 
+    - name: Test with pytest
+      run: |
         pytest
 
+    - name: Test with django tests
+      run: |
         cd api_yamdb/
         python manage.py test
 
@@ -63,10 +67,12 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
+          sudo docker pull kitahkitah/infra_web:latest
           sudo docker-compose stop
           sudo docker-compose rm web
           cd infra/
           sudo docker-compose up --build -d
+          sudo docker system prune
 
   send_message:
     runs-on: ubuntu-latest
